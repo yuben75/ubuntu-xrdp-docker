@@ -27,6 +27,8 @@ services:
       - shared-docker:docker
     volumes:
       - xrdp-home:/home
+      - /home/ubuntu/SDK:/home/dshare/SDK
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - '3389:3389'
       - '2222:22'
