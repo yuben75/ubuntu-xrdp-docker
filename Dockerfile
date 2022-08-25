@@ -8,7 +8,7 @@ RUN apt-get -yy install docker.io docker-compose git
 
 # Configure
 
-RUN echo "export DOCKER_HOST='tcp://docker:2375'" >> /etc/profile
+RUN echo "export DOCKER_HOST='tcp://shared-docker:2375'" >> /etc/profile
 
 # Clean
 
