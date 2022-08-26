@@ -27,11 +27,19 @@ services:
       - shared-docker:docker
     volumes:
       - xrdp-home:/home
+      - /sitara:/sitara
+      - /home/ubuntu/am335x_UB12-32bit:/home/dshare/am335x_UB12-32bit
       - /home/ubuntu/SDK:/home/dshare/SDK
+      - /home/ubuntu/vol_wq3:/home/dshare/vol_wq3
+      - /home/ubuntu/vol_git_pri:/home/dshare/vol_git_pri
+      - /home/ubuntu/__librarys:/home/dshare/__librarys
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - '3389:3389'
       - '2222:22'
+    environment:
+      CHROMA_USER: Chroma_T610_Dikey
+      CHROMA_USER_OS: UB20
 
 ######################################
 # Volumes
