@@ -23,23 +23,20 @@ services:
     hostname: xrdp
     image: danielguerra/ubuntu-xrdp-docker
     shm_size: 1g
+    privileged: true
     links:
       - shared-docker:docker
     volumes:
       - xrdp-home:/home
-      - /sitara:/sitara
-      - /home/ubuntu/am335x_UB12-32bit:/home/dshare/am335x_UB12-32bit
-      - /home/ubuntu/SDK:/home/dshare/SDK
-      - /home/ubuntu/vol_wq3:/home/dshare/vol_wq3
-      - /home/ubuntu/vol_git_pri:/home/dshare/vol_git_pri
-      - /home/ubuntu/__librarys:/home/dshare/__librarys
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - '3389:3389'
+      - '2289:3389'
       - '2222:22'
     environment:
       CHROMA_USER: Chroma_T610_Dikey
       CHROMA_USER_OS: UB20
+    networks:
+      - ipv6_net
 
 ######################################
 # Volumes
@@ -47,3 +44,21 @@ services:
 volumes:
   shared-docker-data:
   xrdp-home:
+  
+networks:
+  ipv6_net:
+    enable_ipv6: true
+    driver: bridge
+    # driver_opts is here just a precaution as some docker compose versions do not process the above "enable_ipv6"
+    driver_opts:
+      com.docker.network.enable_ipv6: "true"
+    ipam:
+      driver: default
+      config:
+      #- subnet: 172.16.238.0/24
+      #  gateway: 172.16.238.1
+       - subnet: 2001:db8:a::/64
+         gateway: 2001:db8:a::1
+  
+  
+  
